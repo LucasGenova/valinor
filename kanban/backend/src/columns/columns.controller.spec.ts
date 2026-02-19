@@ -9,7 +9,7 @@ describe('ColumnsController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ColumnsController],
-      providers: [ColumnsService, CardsService]
+      providers: [ColumnsService, CardsService],
     }).compile();
 
     controller = module.get<ColumnsController>(ColumnsController);

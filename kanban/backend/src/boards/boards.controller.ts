@@ -4,7 +4,10 @@ import { ColumnsService } from '../columns/columns.service';
 
 @Controller('boards')
 export class BoardsController {
-  constructor(private readonly boardsService: BoardsService, private readonly columnsService: ColumnsService) { }
+  constructor(
+    private readonly boardsService: BoardsService,
+    private readonly columnsService: ColumnsService,
+  ) {}
 
   @Get()
   findAll() {
