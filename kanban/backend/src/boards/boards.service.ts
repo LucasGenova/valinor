@@ -1,9 +1,5 @@
 import { Injectable } from '@nestjs/common';
-
-export interface Board {
-  id: string;
-  name: string;
-}
+import { Board } from './boards.model';
 
 @Injectable()
 export class BoardsService {
