@@ -1,6 +1,6 @@
 export interface Card {
   id: string;
-  column_id: string;
+  columnId: string;
   title: string;
   body?: string; 
 }

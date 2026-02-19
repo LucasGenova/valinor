@@ -20,7 +20,7 @@ describe('ColumnsService', () => {
     const column = service.create('brd-1', 'My Column');
 
     expect(column).toHaveProperty('id');
-    expect(column.board_id).toBe('brd-1');
+    expect(column.boardId).toBe('brd-1');
     expect(column.name).toBe('My Column');
   });
 

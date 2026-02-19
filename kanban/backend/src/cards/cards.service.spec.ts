@@ -20,7 +20,7 @@ describe('CardsService', () => {
     const card = service.create('col-1', 'My Card', 'Optional body');
 
     expect(card).toHaveProperty('id');
-    expect(card.column_id).toBe('col-1');
+    expect(card.columnId).toBe('col-1');
     expect(card.title).toBe('My Card');
     expect(card.body).toBe('Optional body');
   });

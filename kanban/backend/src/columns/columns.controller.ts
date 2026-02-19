@@ -11,7 +11,7 @@ export class ColumnsController {
   }
 
   @Post()
-  create(@Body() body: { board_id: string, name: string }) {
-    return this.columnsService.create(body.board_id, body.name);
+  create(@Body() body: { boardId: string, name: string }) {
+    return this.columnsService.create(body.boardId, body.name);
   }
 }

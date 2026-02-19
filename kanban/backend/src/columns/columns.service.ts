@@ -4,19 +4,19 @@ import { Column } from './column.model';
 @Injectable()
 export class ColumnsService {
     private columns: Column[] = [];
-    
-      create(board_id: string, name: string) {
+
+    create(boardId: string, name: string) {
         const column = {
-          id: crypto.randomUUID(),
-          board_id,
-          name,
+            id: crypto.randomUUID(),
+            boardId,
+            name,
         };
-    
+
         this.columns.push(column);
         return column;
-      }
-    
-      findAll() {
+    }
+
+    findAll() {
         return this.columns;
-      }
+    }
 }

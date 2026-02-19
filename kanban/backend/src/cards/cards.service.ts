@@ -5,10 +5,10 @@ import { Card } from './cards.model';
 export class CardsService {
     private cards: Card[] = []
 
-    create(column_id: string, title: string, body?: string) {
+    create(columnId: string, title: string, body?: string) {
     const card = {
       id: crypto.randomUUID(),
-      column_id,
+      columnId: columnId,
       title,
       body
     };

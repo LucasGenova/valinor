@@ -11,7 +11,7 @@ export class CardsController {
   }
 
   @Post()
-  create(@Body() body: { column_id: string, title: string, body?: string }) {
-    return this.cardsService.create(body.column_id, body.title, body.body);
+  create(@Body() body: { columnId: string, title: string, body?: string }) {
+    return this.cardsService.create(body.columnId, body.title, body.body);
   }
 }
