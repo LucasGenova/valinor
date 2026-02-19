@@ -19,4 +19,8 @@ export class ColumnsService {
     findAll() {
         return this.columns;
     }
+
+    findByBoard(boardId: string): Column[] {
+        return this.columns.filter(card => card.boardId === boardId);
+    }
 }

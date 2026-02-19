@@ -35,4 +35,25 @@ describe('ColumnsService', () => {
   it('should return an empty array initially', () => {
     expect(service.findAll()).toEqual([]);
   });
+
+  describe('findByBoard', () => {
+    it('should return columns that belong to the specified board', () => {
+      const col1 = service.create('board-1', 'Column 1');
+      const col2 = service.create('board-1', 'Column 2');
+      const col3 = service.create('board-2', 'Column 3');
+
+      const result = service.findByBoard('board-1');
+
+      expect(result).toHaveLength(2);
+      expect(result).toContainEqual(col1);
+      expect(result).toContainEqual(col2);
+      expect(result).not.toContainEqual(col3);
+    });
+
+    it('should return an empty array if board has no columns', () => {
+      service.create('board-1', 'Some column');
+      const result = service.findByBoard('non-existent');
+      expect(result).toEqual([]);
+    });
+  });
 });
