@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
-import { BoardsService } from './boards.service';
-import { Board } from './board.model';
+import { BoardsService } from '../../services/boards.service';
+import { Board } from '../../models/board.model';
 import { CommonModule } from '@angular/common';
 
 @Component({
