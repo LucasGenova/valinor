@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { BoardsService } from '../../services/boards.service';
 import { Board } from '../../models/board.model';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-boards',
@@ -11,28 +12,15 @@ import { RouterModule } from '@angular/router';
   templateUrl: './boards-list.html',
   styleUrls: ['./boards-list.css'],
 })
-export class BoardsList implements OnInit {
-  boards: Board[] = [];
+export class BoardsList {
+  boards$: Observable<Board[]>;
 
-  constructor(private boardsService: BoardsService, private cdr: ChangeDetectorRef) { }
-
-  ngOnInit() {
-    this.loadBoards();
-  }
-
-  loadBoards() {
-    this.boardsService.findAll().subscribe((data) => {
-      this.boards = data;
-      this.cdr.detectChanges();
-    });
-
+  constructor(private boardsService: BoardsService) {
+    this.boards$ = this.boardsService.findAll();
   }
 
   addBoard(name: string) {
     if (!name) return;
-    this.boardsService.create(name).subscribe((board) => {
-      this.boards = [...this.boards, board];
-      this.cdr.detectChanges();
-    });
+    this.boardsService.create(name).subscribe();
   }
 }

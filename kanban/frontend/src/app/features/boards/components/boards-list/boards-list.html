@@ -7,7 +7,7 @@
   </button>
 
   <div class="grid grid-cols-3 gap-4 mt-4">
-    <a *ngFor="let board of boards" [routerLink]="['/boards', board.id]"
+    <a *ngFor="let board of boards$ | async" [routerLink]="['/boards', board.id]"
       class="bg-gray-100 p-4 rounded shadow hover:shadow-lg transition cursor-pointer block">
       {{ board.name }}
     </a>
