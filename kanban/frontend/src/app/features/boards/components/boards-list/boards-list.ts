@@ -7,10 +7,10 @@ import { CommonModule } from '@angular/common';
   selector: 'app-boards',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './boards.html',
-  styleUrls: ['./boards.css'],
+  templateUrl: './boards-list.html',
+  styleUrls: ['./boards-list.css'],
 })
-export class Boards implements OnInit {
+export class BoardsList implements OnInit {
   boards: Board[] = [];
 
   constructor(private boardsService: BoardsService, private cdr: ChangeDetectorRef) { }
