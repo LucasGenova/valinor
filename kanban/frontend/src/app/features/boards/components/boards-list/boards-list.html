@@ -7,8 +7,9 @@
   </button>
 
   <div class="grid grid-cols-3 gap-4 mt-4">
-    <div *ngFor="let board of boards" class="bg-gray-100 p-4 rounded shadow">
+    <a *ngFor="let board of boards" [routerLink]="['/boards', board.id]"
+      class="bg-gray-100 p-4 rounded shadow hover:shadow-lg transition cursor-pointer block">
       {{ board.name }}
-    </div>
+    </a>
   </div>
 </div>

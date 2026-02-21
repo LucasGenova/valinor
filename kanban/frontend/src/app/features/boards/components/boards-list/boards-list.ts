@@ -2,11 +2,12 @@ import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { BoardsService } from '../../services/boards.service';
 import { Board } from '../../models/board.model';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-boards',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './boards-list.html',
   styleUrls: ['./boards-list.css'],
 })

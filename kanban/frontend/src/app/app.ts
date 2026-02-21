@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import { BoardsList } from './features/boards/components/boards-list/boards-list';
-import { CommonModule } from '@angular/common';
-
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, BoardsList],
-  template: `<app-boards></app-boards>`, 
+  imports: [RouterOutlet],
+  templateUrl: './app.html',
 })
 export class App {}
