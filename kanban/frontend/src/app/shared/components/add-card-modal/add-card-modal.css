@@ -58,3 +58,17 @@
   border-radius: 4px;
   cursor: pointer;
 }
+
+.modal-actions button[type="button"] {
+  background-color: #f0f0f0;
+}
+
+.modal-actions button[type="submit"] {
+  background-color: #0079bf;
+  color: white;
+}
+
+.modal-actions button[type="submit"]:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

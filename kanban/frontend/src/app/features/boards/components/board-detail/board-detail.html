@@ -1,43 +1,38 @@
-<div *ngIf="board$ | async as board">
-  <div class="flex items-center mb-6">
-    <button 
-      (click)="goBack()" 
-      class="mr-4 p-2 rounded-full hover:bg-gray-200 transition-colors duration-200"
-      aria-label="Go back to boards">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-      </svg>
+<div div class="p-4">
+  <div *ngIf="board$ | async as board">
+    <div class="flex items-center mb-6">
+      <button (click)="goBack()" class="mr-4 p-2 rounded-full hover:bg-gray-200 transition-colors duration-200"
+        aria-label="Go back to boards">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+      </button>
+      <h1 class="text-2xl font-bold">{{ board.name }}</h1>
+    </div>
+
+
+    <input #columnName type="text" placeholder="New Column" class="border rounded p-2 mr-2" />
+    <button class="bg-blue-500 text-white rounded p-2" (click)="addColumn(columnName.value); columnName.value=''">
+      Add Column
     </button>
-    <h1 class="text-2xl font-bold">{{ board.name }}</h1>
-  </div>
 
-
-  <input #columnName type="text" placeholder="New Column" class="border rounded p-2 mr-2" />
-  <button class="bg-blue-500 text-white rounded p-2" (click)="addColumn(columnName.value); columnName.value=''">
-    Add Column
-  </button>
-
-  <div *ngIf="columns$ | async as columns">
-    <div *ngIf="columns.length === 0">No columns yet.</div>
-    <div class="columns-container" *ngIf="columns.length > 0">
-      <div *ngIf="columns$ | async as columns">
-        <div *ngIf="columns.length === 0">No columns yet.</div>
-        <div class="columns-container" *ngIf="columns.length > 0">
-          <app-column 
-            *ngFor="let column of columns" 
-            [column]="column" 
-            [cards$]="cardsMap.get(column.id)!"
-            (addCard)="openAddCardModal($event)">
-          </app-column>
+    <div *ngIf="columns$ | async as columns">
+      <div *ngIf="columns.length === 0">No columns yet.</div>
+      <div class="columns-container" *ngIf="columns.length > 0">
+        <div *ngIf="columns$ | async as columns">
+          <div *ngIf="columns.length === 0">No columns yet.</div>
+          <div class="columns-container" *ngIf="columns.length > 0" cdkDrag>
+            <app-column *ngFor="let column of columns" [column]="column" [cards$]="cardsMap.get(column.id)!"
+              (addCard)="openAddCardModal($event)">
+            </app-column>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<app-add-card-modal
-  *ngIf="showAddCardModal"
-  [columnName]="selectedColumnName!"
-  (save)="onSaveCard($event)"
-  (close)="closeModal()">
-</app-add-card-modal>
+  <app-add-card-modal *ngIf="showAddCardModal" [columnName]="selectedColumnName!" (save)="onSaveCard($event)"
+    (close)="closeModal()">
+  </app-add-card-modal>
+</div>
