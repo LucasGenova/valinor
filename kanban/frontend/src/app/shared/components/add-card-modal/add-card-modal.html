@@ -1,0 +1,31 @@
+<div class="modal-backdrop" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h3>New card: {{ columnName }}</h3>
+    <form (ngSubmit)="onSave()" #cardForm="ngForm">
+      <div>
+        <label for="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          [(ngModel)]="title"
+          required
+          autofocus
+        />
+      </div>
+      <div>
+        <label for="body">Body</label>
+        <textarea
+          id="body"
+          name="body"
+          [(ngModel)]="body"
+          rows="4"
+        ></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" (click)="onClose()">Cancel</button>
+        <button type="submit" [disabled]="!title.trim()">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

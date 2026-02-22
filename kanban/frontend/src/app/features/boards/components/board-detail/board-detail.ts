@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { BoardsService } from '../../services/boards.service';
 import { Board } from '../../models/board.model';
@@ -9,11 +9,12 @@ import { ColumnService } from '../../../columns/services/column';
 import { Card } from '../../../cards/models/card.model';
 import { CardService } from '../../../cards/services/cards';
 import { ColumnComponent } from '../../../columns/components/column/column';
+import { AddCardModalComponent } from '../../../../shared/components/add-card-modal/add-card-modal';
 
 @Component({
   selector: 'app-board-detail',
   standalone: true,
-  imports: [CommonModule, ColumnComponent],
+  imports: [CommonModule, ColumnComponent, AddCardModalComponent],
   templateUrl: './board-detail.html',
   styleUrls: ['./board-detail.css']
 })
@@ -23,8 +24,13 @@ export class BoardDetail {
   columns$ = this.columnsSubject.asObservable();
   cardsMap = new Map<string, BehaviorSubject<Card[]>>();
 
+  showAddCardModal = false;
+  selectedColumnId: string | null = null;
+  selectedColumnName: string | null = null;
+
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private boardsService: BoardsService,
     private columnService: ColumnService,
     private cardService: CardService
@@ -71,11 +77,35 @@ export class BoardDetail {
     });
   }
 
-  addCard(columnId: string): void {
-    const title = prompt('Enter card title:');
-    if (!title) return;
-    this.cardService.create({ columnId, title }).subscribe(() => {
-      this.loadCardsForColumn(columnId);
-    });
+  openAddCardModal(columnId: string) {
+    const currentColumns = this.columnsSubject.value;
+    const column = currentColumns.find(c => c.id === columnId);
+    this.selectedColumnName = column ? column.name : '';
+
+    this.selectedColumnId = columnId;
+    this.showAddCardModal = true;
+  }
+
+
+  onSaveCard(cardData: { title: string; body: string }) {
+    if (this.selectedColumnId) {
+      this.cardService.create({
+        columnId: this.selectedColumnId,
+        title: cardData.title,
+        body: cardData.body
+      }).subscribe(() => {
+        this.loadCardsForColumn(this.selectedColumnId!);
+        this.closeModal();
+      });
+    }
+  }
+
+  closeModal() {
+    this.showAddCardModal = false;
+    this.selectedColumnId = null;
+  }
+
+  goBack(): void {
+    this.router.navigate(['/boards']);
   }
 }

@@ -13,7 +13,7 @@ export class CardService {
     return this.http.get<Card[]>(`${this.apiUrl}/columns/${columnId}/cards`);
   }
 
-  create(card: { columnId: string; title: string }): Observable<Card> {
+  create(card: { columnId: string; title: string, body?: string }): Observable<Card> {
     return this.http.post<Card>(`${this.apiUrl}/cards`, card);
   }
 }
