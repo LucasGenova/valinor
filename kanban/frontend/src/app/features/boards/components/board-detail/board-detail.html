@@ -1,4 +1,29 @@
 <div *ngIf="board$ | async as board">
-  <h1 class="text-2xl font-bold">{{ board.name }}</h1>
+  <div>
+    <h1 class="text-2xl font-bold">{{ board.name }}</h1>
+  </div>
   <p class="text-gray-600">Board ID: {{ board.id }}</p>
+
+
+  <input #columnName type="text" placeholder="New Column" class="border rounded p-2 mr-2" />
+  <button class="bg-blue-500 text-white rounded p-2" (click)="addColumn(columnName.value); columnName.value=''">
+    Add Column
+  </button>
+
+  <div *ngIf="columns$ | async as columns">
+    <div *ngIf="columns.length === 0">No columns yet.</div>
+    <div class="columns-container" *ngIf="columns.length > 0">
+      <div *ngIf="columns$ | async as columns">
+        <div *ngIf="columns.length === 0">No columns yet.</div>
+        <div class="columns-container" *ngIf="columns.length > 0">
+          <app-column 
+            *ngFor="let column of columns" 
+            [column]="column" 
+            [cards$]="cardsMap.get(column.id)!"
+            (addCard)="addCard($event)">
+          </app-column>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

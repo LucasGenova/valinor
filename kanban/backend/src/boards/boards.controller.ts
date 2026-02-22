@@ -20,7 +20,7 @@ export class BoardsController {
   }
 
   @Get(':boardId/columns')
-  getCardsByColumn(@Param('boardId') boardId: string) {
+  getColumnsByBoard(@Param('boardId') boardId: string) {
     return this.columnsService.findByBoard(boardId);
   }
 }
