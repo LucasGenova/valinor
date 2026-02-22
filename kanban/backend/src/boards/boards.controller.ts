@@ -24,9 +24,8 @@ export class BoardsController {
     return this.columnsService.findByBoard(boardId);
   }
 
-  @Delete()
-  delete(@Body() body: { boardId: string }) {
-    this.columnsService.deleteByBoard(body.boardId);
-    this.boardsService.delete(body.boardId);
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    this.boardsService.delete(id);
   }
 }

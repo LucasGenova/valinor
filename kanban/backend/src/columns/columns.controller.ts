@@ -24,8 +24,8 @@ export class ColumnsController {
     return this.cardsService.findByColumn(columnId);
   }
 
-  @Delete()
-  delete(@Body() body: { columnId: string }){
-    this.columnsService.delete(body.columnId);
+  @Delete(':id')
+  delete(@Param('id') id: string ){
+    this.columnsService.delete(id);
   }
 }
