@@ -57,4 +57,46 @@ describe('CardsService', () => {
       expect(result).toEqual([]);
     });
   });
+
+  describe('delete', () => {
+    it('should remove a card by id', () => {
+      const card = service.create('col-1', 'My Card');
+      service.delete(card.id);
+      expect(service.findAll()).toHaveLength(0);
+    });
+
+    it('should only remove the specified card', () => {
+      const card1 = service.create('col-1', 'Card 1');
+      const card2 = service.create('col-1', 'Card 2');
+
+      service.delete(card1.id);
+
+      const cards = service.findAll();
+      expect(cards).toHaveLength(1);
+      expect(cards[0].id).toBe(card2.id);
+    });
+  });
+
+  describe('deleteByColumn', () => {
+    it('should remove all cards in a column', () => {
+      service.create('col-1', 'Card 1');
+      service.create('col-1', 'Card 2');
+      service.create('col-2', 'Card 3');
+
+      service.deleteByColumn('col-1');
+
+      const cards = service.findAll();
+      expect(cards).toHaveLength(1);
+      expect(cards[0].columnId).toBe('col-2');
+    });
+
+    it('should do nothing if column has no cards', () => {
+      const card = service.create('col-1', 'My Card');
+
+      service.deleteByColumn('non-existent');
+
+      expect(service.findAll()).toHaveLength(1);
+      expect(service.findAll()[0].id).toBe(card.id);
+    });
+  });
 });
