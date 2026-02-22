@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 import { ColumnsService } from '../columns/columns.service';
 
@@ -7,7 +7,7 @@ export class BoardsController {
   constructor(
     private readonly boardsService: BoardsService,
     private readonly columnsService: ColumnsService,
-  ) {}
+  ) { }
 
   @Get()
   findAll() {
@@ -22,5 +22,11 @@ export class BoardsController {
   @Get(':boardId/columns')
   getColumnsByBoard(@Param('boardId') boardId: string) {
     return this.columnsService.findByBoard(boardId);
+  }
+
+  @Delete()
+  delete(@Body() body: { boardId: string }) {
+    this.columnsService.deleteByBoard(body.boardId);
+    this.boardsService.delete(body.boardId);
   }
 }

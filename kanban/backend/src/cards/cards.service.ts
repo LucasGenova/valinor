@@ -24,4 +24,12 @@ export class CardsService {
   findByColumn(columnId: string): Card[] {
     return this.cards.filter((card) => card.columnId === columnId);
   }
+
+  delete(cardId: string) {
+    this.cards = this.cards.filter((card) => card.id != cardId)
+  }
+
+  deleteByColumn(columnId: string){
+    this.cards = this.cards.filter((card) => card.columnId != columnId)
+  }
 }

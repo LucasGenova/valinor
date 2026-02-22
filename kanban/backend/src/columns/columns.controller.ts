@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ColumnsService } from './columns.service';
 import { CardsService } from '../cards/cards.service';
 
@@ -22,5 +22,10 @@ export class ColumnsController {
   @Get(':columnId/cards')
   getCardsByColumn(@Param('columnId') columnId: string) {
     return this.cardsService.findByColumn(columnId);
+  }
+
+  @Delete()
+  delete(@Body() body: { columnId: string }){
+    this.columnsService.delete(body.columnId);
   }
 }
