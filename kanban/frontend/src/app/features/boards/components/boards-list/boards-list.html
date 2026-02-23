@@ -6,10 +6,23 @@
     Add Board
   </button>
 
+
   <div class="grid grid-cols-3 gap-4 mt-4">
-    <a *ngFor="let board of boards$ | async" [routerLink]="['/boards', board.id]"
-      class="bg-gray-100 p-4 rounded shadow hover:shadow-lg transition cursor-pointer block">
-      {{ board.name }}
-    </a>
+    <div *ngFor="let board of boards$ | async" class="relative group">
+      <div class="flex w-full">
+        <a [routerLink]="['/boards', board.id]"
+          class="flex-1 bg-gray-100 p-4 rounded shadow hover:shadow-lg transition cursor-pointer">
+          {{ board.name }}
+        </a>
+        <button (click)="onDeleteBoard(board.id)"
+          class="absolute right-2 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-200 rounded-full z-10 backdrop-blur-sm"
+          aria-label="Delete board">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
   </div>
 </div>

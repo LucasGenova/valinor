@@ -32,4 +32,10 @@ export class BoardsService {
       })
     );
   }
+
+  delete(boardId: string ) {
+    return this.http.delete(`${this.apiUrl}/${boardId}`).pipe(
+      tap(() => this.loadBoards())
+    );
+  }
 }

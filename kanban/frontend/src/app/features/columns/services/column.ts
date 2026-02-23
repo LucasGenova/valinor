@@ -7,13 +7,17 @@ import { Column } from '../models/column.model';
 export class ColumnService {
   private apiUrl = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getColumnsByBoard(boardId: string): Observable<Column[]> {
     return this.http.get<Column[]>(`${this.apiUrl}/boards/${boardId}/columns`);
   }
 
-  create(column: { boardId: string; name: string}): Observable<Column> {
-  return this.http.post<Column>(`${this.apiUrl}/columns`, column);
-}
+  create(column: { boardId: string; name: string }): Observable<Column> {
+    return this.http.post<Column>(`${this.apiUrl}/columns`, column);
+  }
+
+  delete(columnId: string) {
+    return this.http.delete(`${this.apiUrl}/columns/${columnId}`);
+  }
 }

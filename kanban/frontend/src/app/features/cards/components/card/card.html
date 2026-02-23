@@ -1,4 +1,14 @@
 <div class="card">
-  <h4>{{ card.title }}</h4>
+  <div class="flex justify-between items-start">
+    <h4>{{ card.title }}</h4>
+    <button 
+      (click)="onDelete()" 
+      class="p-1 hover:bg-gray-200 rounded-full"
+      aria-label="Delete card">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
   <p *ngIf="card.body">{{ card.body }}</p>
 </div>

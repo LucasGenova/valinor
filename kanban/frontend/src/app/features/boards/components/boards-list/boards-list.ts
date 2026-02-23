@@ -23,4 +23,8 @@ export class BoardsList {
     if (!name) return;
     this.boardsService.create(name).subscribe();
   }
+
+  onDeleteBoard(boardId: string) {
+    this.boardsService.delete(boardId).subscribe();
+  }
 }

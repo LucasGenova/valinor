@@ -4,6 +4,7 @@ import { Column } from '../../models/column.model';
 import { Card } from '../../../cards/models/card.model';
 import { CardComponent } from '../../../cards/components/card/card';
 import { Observable } from 'rxjs';
+import { CardService } from '../../../cards/services/cards';
 
 @Component({
   selector: 'app-column',
@@ -16,8 +17,20 @@ export class ColumnComponent {
   @Input() column!: Column;
   @Input() cards$!: Observable<Card[]>;
   @Output() addCard = new EventEmitter<string>();
+  @Output() deleteCard = new EventEmitter<string>();
+  @Output() delete = new EventEmitter<string>()
+
+  constructor(private cardService: CardService) { }
 
   onAddCard(): void {
     this.addCard.emit(this.column.id);
+  }
+
+  onDeleteCard(cardId: string) {
+    this.deleteCard.emit(cardId);
+  }
+    
+  onDelete() {
+      this.delete.emit(this.column.id);
   }
 }

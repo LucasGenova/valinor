@@ -108,4 +108,31 @@ export class BoardDetail {
   goBack(): void {
     this.router.navigate(['/boards']);
   }
+
+  onDeleteCard(cardId: string) {
+    this.cardService.delete(cardId).subscribe({
+      next: () => {
+        for (let [_, subject] of this.cardsMap.entries()) {
+          const currentCards = subject.value;
+          const updatedCards = currentCards.filter(c => c.id !== cardId);
+          if (updatedCards.length !== currentCards.length) {
+            subject.next(updatedCards);
+            break;
+          }
+        }
+      }
+    });
+  }
+
+  onDeleteColumn(columnId: string) {
+    this.columnService.delete(columnId).subscribe({
+      next: () => {
+
+        const currentColumns = this.columnsSubject.value;
+        const updatedColumns = currentColumns.filter(c => c.id !== columnId);
+        this.columnsSubject.next(updatedColumns);
+      }
+    });
+  }
 }
+

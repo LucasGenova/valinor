@@ -16,4 +16,8 @@ export class CardService {
   create(card: { columnId: string; title: string, body?: string }): Observable<Card> {
     return this.http.post<Card>(`${this.apiUrl}/cards`, card);
   }
+
+  delete(cardId: string ) {
+    return this.http.delete(`${this.apiUrl}/cards/${cardId}`);
+  }
 }

@@ -1,6 +1,14 @@
 <div class="column">
-  <h3>{{ column.name }}</h3>
-  <app-card *ngFor="let card of (cards$ | async)" [card]="card"></app-card>
+  <div class="flex justify-between items-start">
+    <h3>{{ column.name }}</h3>
+    <button (click)="onDelete()" class="p-1 hover:bg-gray-200 rounded-full" aria-label="Delete card">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+  <app-card *ngFor="let card of (cards$ | async)" (delete)="onDeleteCard($event)" [card]="card"></app-card>
   <button class="bg-blue-500 text-white rounded p-2" (click)="onAddCard()">
     Add Card
   </button>

@@ -24,7 +24,7 @@
           <div *ngIf="columns.length === 0">No columns yet.</div>
           <div class="columns-container" *ngIf="columns.length > 0" cdkDrag>
             <app-column *ngFor="let column of columns" [column]="column" [cards$]="cardsMap.get(column.id)!"
-              (addCard)="openAddCardModal($event)">
+              (addCard)="openAddCardModal($event)" (deleteCard)="onDeleteCard($event)" (delete)="onDeleteColumn($event)">
             </app-column>
           </div>
         </div>
